@@ -53,7 +53,7 @@ def pcl_callback(pcl_msg):
 
     # TODO: Convert ROS msg to PCL data
     cloud = ros_to_pcl(pcl_msg)
-    
+
     # TODO: Statistical Outlier Filtering
     outlier_filter = cloud.make_statistical_outlier_filter()
 
@@ -229,7 +229,7 @@ def pcl_callback(pcl_msg):
 
 #function to load parameters and request PickPlace service
 def pr2_mover(object_list):
-    
+
 
 
     # TODO: Initialize variables
@@ -245,7 +245,7 @@ def pr2_mover(object_list):
     # get parameters
     object_list_param = rospy.get_param('/object_list')
     # TODO: Parse parameters into individual variables
-      
+
     # TODO: Rotate PR2 in place to capture side tables for the collision map
 
 
@@ -253,7 +253,7 @@ def pr2_mover(object_list):
     for item in object_list_param:
         object_name.data = item['name']
         object_group = item['group']
-        
+
         print('Processing pick list item {0} in group {1}'.format(object_name.data, object_group))
         # TODO: Get the PointCloud for a given object and obtain it's centroid
         labels = []
@@ -274,8 +274,6 @@ def pr2_mover(object_list):
         else:
             print('%s not detected, unable to pick' % object_name.data)
 
-          
-
         # TODO: Create 'place_pose' for the object
         dropbox_param = rospy.get_param('/dropbox')
         #Parse Dropbox parameters
@@ -287,8 +285,6 @@ def pr2_mover(object_list):
                 place_pose.position.x = dropbox_pos[0]
                 place_pose.position.y = dropbox_pos[1]
                 place_pose.position.z = dropbox_pos[2]
-
-
 
         # TODO: Assign the arm to be used for pick_place
         if object_group == 'green':
